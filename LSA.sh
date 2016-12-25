@@ -1,10 +1,16 @@
-#./train-word.sh
-QUESTION=data/testing/Data/Holmes.machine_format.questions.txt
-WORD2VEC_MODEL=model/key.125.model
+MSR_TEST=data/MSR_Sentence_Completion_Challenge_V1/
+QUESTION=$MSR_TEST/Holmes.machine_format.questions.txt
+
+MODEL=model/
+WORD2VEC_MODEL=$model/key.125.model
+
 STOP_WORDS=data/stop_words.txt
+
 RESULT=$1
+
 FEATURE_1=data/neighbor.bi.1.csv
 FEATURE_2=data/neighbor.bi.2.csv
+
 ANSWER=data/testing/Data/Holmes.machine_format.answers.txt
 
 if [ -f $RESULT ]; then

@@ -4,5 +4,5 @@ data/MSR_Sentence_Completion_Challenge_V1
 data/dependency
 data/Holmes*
 trunk/
-
-
+model/
+result/
