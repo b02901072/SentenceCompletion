@@ -1,2 +1,8 @@
-data/
-Holmes/
+data/Holmes
+data/Holmes_Training_Data
+data/MSR_Sentence_Completion_Challenge_V1
+data/dependency
+data/Holmes*
+trunk/
+
+
