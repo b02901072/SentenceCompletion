@@ -88,7 +88,7 @@ for i in range(vocab_num):
 
 print('Calculating DMPI...')
 delta = (cooccur_matrix / (cooccur_matrix + 1)) * (mincontext / mincontext + 1)
-dpmi = pmi * dpmi
+dpmi = pmi * delta
 
 print('Saving DPMI Model...')
 '''
