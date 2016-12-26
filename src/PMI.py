@@ -55,16 +55,26 @@ for i in range(vocab_num):
 		try:
 			c = cooccurence[v1][v2]
 		except Exception:
-			c = 0
+			c = 1
 		cooccur_matrix[i][j] = c
+del cooccurence
 
 print('Calculating PMI...')
-Pall = np.sum(np.sum(cooccurence))
+Pall = np.sum(np.sum(cooccur_matrix))
 Pi = np.sum(cooccur_matrix, 1) / Pall
 Pj = np.sum(cooccur_matrix, 0) / Pall
 Pij = cooccur_matrix / Pall
 
-pmi = math.log( Pij / (Pi*Pj), 2)
+pmi = np.zeros((vocab_num, vocab_num), dtype='float32')
+for i in range(vocab_num):
+	pi = Pi[i]
+	for j in range(vocab_num):
+		pj = Pj[j]
+		pij = Pij[i][j]
+		try:
+			pmi[i][j] = math.log( pij / (pi*pj), 2)
+		except Exception:
+			pmi[i][j] = -10000.0
 
 print('Calculating mincontext...')
 mincontext = np.zeros((vocab_num, vocab_num), dtype='float32')
