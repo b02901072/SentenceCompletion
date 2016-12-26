@@ -22,8 +22,7 @@ with open(holmes_corpus_file, 'r') as f:
 	for line in f:
 		print(line_count)
 		line_count += 1
-		if line_count > 10000:
-			break
+
 		words = line[:-1].split()
 		word_count += len(words)
 		for word_1 in words:
