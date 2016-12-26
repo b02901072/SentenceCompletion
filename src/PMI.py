@@ -40,7 +40,7 @@ vocabs = cooccurence.keys()
 vocab_num = len(vocabs)
 v_str_to_id = {}
 v_id_to_str = {}
-coocur_matrix = np.zeros((vocab_num, vocab_num), dtype='int32')
+cooccur_matrix = np.zeros((vocab_num, vocab_num), dtype='float32')
 vocab_id = 0
 for v in vocabs:
 	v_str_to_id[v] = vocab_id
@@ -56,17 +56,29 @@ for i in range(vocab_num):
 			c = cooccurence[v1][v2]
 		except Exception:
 			c = 0
-		coocur_matrix[i][j] = c
+		cooccur_matrix[i][j] = c
+
+print('Calculating PMI...')
+Pall = np.sum(np.sum(cooccurence))
+Pi = np.sum(cooccur_matrix, 1) / Pall
+Pj = np.sum(cooccur_matrix, 0) / Pall
+Pij = cooccur_matrix / Pall
+
+pmi = math.log( Pij / (Pi*Pj), 2)
 
 print('Calculating mincontext...')
-mincontext = np.zeros((vocab_num, vocab_num), dtype='int32')
-sum_x_kj = np.sum(coocur_matrix, 0)
-sum_x_ik = np.sum(coocur_matrix, 1)
+mincontext = np.zeros((vocab_num, vocab_num), dtype='float32')
+sum_x_kj = np.sum(cooccur_matrix, 0)
+sum_x_ik = np.sum(cooccur_matrix, 1)
 for i in range(vocab_num):
 	v1 = v_id_to_str[i]
 	for j in range(vocab_num):
 		v2 = v_id_to_str[j]
 		mincontext[i][j] = min(sum_x_kj[j], sum_x_ik[i]) 
+
+print('Calculating DMPI...')
+delta = (cooccur_matrix / (cooccur_matrix + 1)) * (mincontext / mincontext + 1)
+dpmi = pmi * dpmi
 
 print('Saving DPMI Model...')
 '''
