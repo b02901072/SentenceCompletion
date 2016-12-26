@@ -82,17 +82,5 @@ dpmi = pmi * dpmi
 
 print('Saving DPMI Model...')
 '''
-with open(pmi_model_file, 'w') as f:
-	vocabs1 = cooccurence.keys()
-	for v1 in vocabs1:
-		v1_occur = cooccurence[v1][v1]
-		vocabs2 = cooccurence[v1].keys()
-		for v2 in vocabs2:
-			v2_occur = cooccurence[v2][v2]
-			v1v2_cooccur = cooccurence[v1][v2]
-			pmi_score = math.log(float(v1v2_cooccur) * word_count / float(v1_occur*v2_occur), 2)
-			pmi_score = round(pmi_score, 2)
-			pmi_str = ' '.join([v1, v2, str(pmi_score)])
-			f.write(pmi_str + '\n')
-	f.close()
+
 '''
