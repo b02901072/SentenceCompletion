@@ -1,6 +1,10 @@
 import sys
 import numpy as np
 import math
+try:
+	import cpickle as pickle
+except:
+	import pickle
 
 holmes_corpus_file = sys.argv[1]
 pmi_model_file = sys.argv[2]
@@ -86,11 +90,11 @@ for i in range(vocab_num):
 		v2 = v_id_to_str[j]
 		mincontext[i][j] = min(sum_x_kj[j], sum_x_ik[i]) 
 
-print('Calculating DMPI...')
+print('Calculating DPMI...')
 delta = (cooccur_matrix / (cooccur_matrix + 1)) * (mincontext / mincontext + 1)
 dpmi = pmi * delta
 
 print('Saving DPMI Model...')
-'''
-
-'''
+np.save('dpmi.model', dpmi)
+with open('vocab.pkl', 'wb') as f:
+	pickle.dump(v_id_to_str, f, 0)
