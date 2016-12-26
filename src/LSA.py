@@ -5,8 +5,6 @@ import sys
 from sklearn.metrics.pairwise import cosine_similarity
 import random
 
-sys.path.insert(0, '/usr/local/lib/python2.7/dist-packages/numpy')
-
 word2vec_model_file = sys.argv[1]
 vecDict = IO.readVec(word2vec_model_file)
 questions_file = sys.argv[2]
@@ -86,7 +84,7 @@ with open(result_file, 'w') as fw:
                     for i in range(len(words)):
                         if i != key_index:
                             word = words[i]
-                            weight = 1.0
+                            weight = 0.0
                             if abs(i - key_index) > WINDOW_SIZE:
                                 weight = 0.0
                             if word in features_2:

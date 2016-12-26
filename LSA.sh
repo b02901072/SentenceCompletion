@@ -3,7 +3,7 @@ QUESTION=$MSR_TEST/Data/Holmes.machine_format.questions.txt
 ANSWER=$MSR_TEST/Data/Holmes.machine_format.answers.txt
 
 MODEL=model
-WORD2VEC_MODEL=$MODEL/key.125.model
+WORD2VEC_MODEL=$MODEL/key.150.model
 
 STOP_WORDS=data/stop_words.txt
 

@@ -4,9 +4,11 @@ from keras import backend as K
 import numpy as np
 import IO
 
+word2vec_model_file = sys.argv[1]
+word2vec_vocab_file = sys.argv[2]
 
-vecDict = IO.readVec("data/train_vectors.10.txt")
-vocabDict = IO.readVocab("data/train_vectors.10.txt")
+vecDict = IO.readVec(word2vec_model_file)
+vocabDict = IO.readVocab(word2vec_vocab_file)
 vecMatrix = K.variable( np.array( vecDict.values() ), name="vecMatrix" ) 
 
 timesteps = 15
