@@ -14,10 +14,10 @@ with open(stop_words_file, 'r') as f:
     for line in f:
         stop_words.append(line[:-1])
 
-cooccurence = {}
+occurence = {}
 line_count = 1
 word_count = 0
-print('Counting cooccurence...')
+print('Counting occurence...')
 with open(holmes_corpus_file, 'r') as f:
 	for line in f:
 		print(line_count)
@@ -28,18 +28,25 @@ with open(holmes_corpus_file, 'r') as f:
 		for word_1 in words:
 			if word_1 in stop_words:
 				continue
-			if word_1 not in cooccurence:
-				cooccurence[word_1] = {}
+			if word_1 not in occurence:
+				occurence[word_1] = {}
 			for word_2 in words:
 				if word_2 in stop_words:
 					continue
-				if word_2 not in cooccurence[word_1]:
-					cooccurence[word_1][word_2] = 0
-				cooccurence[word_1][word_2] += 1
+				if word_2 not in occurence[word_1]:
+					occurence[word_1][word_2] = 0
+				occurence[word_1][word_2] += 1
 	f.close()
 
-print('Building cooccurence matrix...')
-vocabs = cooccurence.keys()
+print('Building occurence matrix...')
+vocabs = occurence.keys()
+print(len(vocabs))
+for v in vocabs:
+	if occurence[v][v] <= 5:
+		del occurence[v]
+vocabs = occurence.keys()
+print(len(vocabs))
+
 vocab_num = len(vocabs)
 v_str_to_id = {}
 v_id_to_str = {}
@@ -56,11 +63,11 @@ for i in range(vocab_num):
 		v2 = v_id_to_str[j]
 		print(i, j)
 		try:
-			c = cooccurence[v1][v2]
+			c = occurence[v1][v2]
 		except Exception:
 			c = 1
 		cooccur_matrix[i][j] = c
-del cooccurence
+del occurence
 
 print('Calculating PMI...')
 Pall = np.sum(np.sum(cooccur_matrix))
