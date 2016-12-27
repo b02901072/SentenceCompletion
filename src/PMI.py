@@ -86,6 +86,7 @@ for i in range(vocab_num):
 			pmi[i][j] = math.log( pij / (pi*pj), 2)
 		except Exception:
 			pmi[i][j] = -10000.0
+		pmi[i][j] = max(0, pmi[i][j])
 
 print('Calculating mincontext...')
 mincontext = np.zeros((vocab_num, vocab_num), dtype='float32')
