@@ -42,7 +42,7 @@ print('Building occurence matrix...')
 vocabs = occurence.keys()
 print(len(vocabs))
 for v in vocabs:
-	if occurence[v][v] <= 100:
+	if occurence[v][v] <= 50:
 		del occurence[v]
 vocabs = occurence.keys()
 print(len(vocabs))
@@ -62,7 +62,6 @@ for i in range(vocab_num):
 	print(i)
 	for j in range(vocab_num):
 		v2 = v_id_to_str[j]
-		print(i, j)
 		try:
 			c = occurence[v1][v2]
 		except Exception:
@@ -105,4 +104,4 @@ dpmi = pmi * delta
 print('Saving DPMI Model...')
 np.save('dpmi.model', dpmi)
 with open('vocab.pkl', 'wb') as f:
-	pickle.dump(v_id_to_str, f, 0)
+	pickle.dump(v_str_to_id, f, 0)

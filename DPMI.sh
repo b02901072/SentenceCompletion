@@ -3,7 +3,7 @@ QUESTION=$MSR_TEST/Data/Holmes.machine_format.questions.txt
 ANSWER=$MSR_TEST/Data/Holmes.machine_format.answers.txt
 
 MODEL=model
-DPMI_MODEL=dpmi.model.npy
+DPMI_MODEL=$MODEL/dpmi.model.npy
 VOCAB=vocab.pkl
 
 STOP_WORDS=data/stop_words.txt

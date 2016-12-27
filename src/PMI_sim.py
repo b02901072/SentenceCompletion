@@ -88,22 +88,28 @@ with open(result_file, 'w') as fw:
 						words[i] = key
 						break
 				word_count = 0
+				weight_sum = 0.0
 				if key not in v_str_to_id:
 					score = 0.0
 				else:
 					key_id = v_str_to_id[key]
-					score += 
 					for i in range(len(words)):
+						weight = 0.0
 						if i != key_index:
 							word = words[i]
 							if word in stop_words:
 								continue
 							if word not in v_str_to_id:
 								continue
+							if word in features_2:
+								weight = 0.0
+							if word in features_1:
+								weight = 4.0
+							weight_sum += weight
 							word_id = v_str_to_id[word]
-							score += dpmi[key_id][word_id]
+							score += weight * dpmi[key_id][word_id]
 
-				similarity[choice] = score
+				similarity[choice] = score / max(weight_sum, 1.0)
 			
 			answer = np.argmax(similarity)
 			fw.write(choices[answer] + '\n')
