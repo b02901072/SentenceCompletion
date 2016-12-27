@@ -42,7 +42,7 @@ print('Building occurence matrix...')
 vocabs = occurence.keys()
 print(len(vocabs))
 for v in vocabs:
-	if occurence[v][v] <= 5:
+	if occurence[v][v] <= 100:
 		del occurence[v]
 vocabs = occurence.keys()
 print(len(vocabs))
@@ -59,6 +59,7 @@ for v in vocabs:
 
 for i in range(vocab_num):
 	v1 = v_id_to_str[i]
+	print(i)
 	for j in range(vocab_num):
 		v2 = v_id_to_str[j]
 		print(i, j)
@@ -77,6 +78,7 @@ Pij = cooccur_matrix / Pall
 
 pmi = np.zeros((vocab_num, vocab_num), dtype='float32')
 for i in range(vocab_num):
+	print(i)
 	pi = Pi[i]
 	for j in range(vocab_num):
 		pj = Pj[j]
